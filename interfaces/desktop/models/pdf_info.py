@@ -1,9 +1,12 @@
 """
 Defines the data model for displaying information about a PDF.
 """
+import sys
 from copy import copy
 from typing import Dict, Union, List
-from PyQt6.QtCore import QAbstractTableModel
+from PyQt6.QtCore import QAbstractTableModel, Qt
+from PyQt6.QtWidgets import QTableView, QApplication
+
 from interfaces.desktop.exceptions.pdf_info_exceptions import (
     IncorrectPDFInfoModelDataLength,
 )
@@ -14,11 +17,11 @@ class PDFInfoModel(QAbstractTableModel):
     Data model to display information about PDF(s).
     """
 
-    _mapping: Dict[str, str] = {
-        "Name": "filename",
-        "Path": "filepath",
-        "Page(s)": "pages_amount",
-        "Words": "words_amount",
+    _mapping: Dict[int, str] = {
+        0: "filename",
+        1: "filepath",
+        2: "pages_amount",
+        3: "words_amount",
     }
     _type_mapping: Dict[str, type] = {
         "filename": str,
@@ -114,3 +117,49 @@ class PDFInfoModel(QAbstractTableModel):
             The amount of rows to display.
         """
         return len(self._mapping)
+
+    def data(self, index, role=...) -> Union[str, int]:
+        """
+
+        Args:
+            index: The index of the current table position.
+            role: The role to the data
+
+        Returns:
+            The corresponding data to that index.
+        """
+        if not index.isValid():
+            return ""
+
+        row = index.row()
+        column = index.column()
+
+        if role == Qt.ItemDataRole.DisplayRole:
+            pdf_index = row  # find which pdf needs to be fetched
+            data_index = self._mapping[
+                column
+            ]  # find which d=ata point from the pdf need to be displayed
+            return self._pdfs_data[row][self._mapping[column]]
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    data = [
+        {
+            "filename": "test.pdf",
+            "filepath": "/a/path/for/test.pdf",
+            "pages_amount": 5,
+            "words_amount": 10,
+        },
+        {
+            "filename": "another_test.pdf",
+            "filepath": "/another/path/for/another_test.pdf",
+            "pages_amount": 7,
+            "words_amount": 14,
+        },
+    ]
+    table_view = QTableView()
+    table_view_model = PDFInfoModel(data)
+    table_view.setModel(table_view_model)
+    table_view.show()
+    sys.exit(app.exec())

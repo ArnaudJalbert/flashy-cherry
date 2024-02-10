@@ -2,8 +2,11 @@
 Tests everything that has to do with the PDFInfoModel.
 """
 import unittest
+from typing import List, Dict, Union
 
-from interfaces.desktop.pdf_info import PDFInfoModel
+from PyQt6.QtCore import QModelIndex, Qt
+
+from interfaces.desktop.models.pdf_info import PDFInfoModel
 from interfaces.desktop.exceptions.pdf_info_exceptions import (
     IncorrectPDFInfoModelDataLength,
 )
@@ -15,7 +18,7 @@ class TestPDFInfoModel(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.data = [
+        self.data: List[Dict[str, Union[str, int]]] = [
             {
                 "filename": "test.pdf",
                 "filepath": "/a/path/for/test.pdf",
@@ -23,7 +26,7 @@ class TestPDFInfoModel(unittest.TestCase):
                 "words_amount": 10,
             }
         ]
-        self.data_2_pdfs = [
+        self.data_2_pdfs: List[Dict[str, Union[str, int]]] = [
             {
                 "filename": "test.pdf",
                 "filepath": "/a/path/for/test.pdf",
@@ -37,8 +40,8 @@ class TestPDFInfoModel(unittest.TestCase):
                 "words_amount": 14,
             },
         ]
-        self.data_model = PDFInfoModel(self.data)
-        self.data_model_2_pdfs = PDFInfoModel(self.data_2_pdfs)
+        self.data_model: PDFInfoModel = PDFInfoModel(self.data)
+        self.data_model_2_pdfs: PDFInfoModel = PDFInfoModel(self.data_2_pdfs)
 
     def test_incorrect_data_length_too_long(self) -> None:
         """
@@ -93,6 +96,16 @@ class TestPDFInfoModel(unittest.TestCase):
 
         row_amount_1_pdf = len([self.data])
         self.assertEqual(row_amount_1_pdf, self.data_model.rowCount())
+
+    def test_data(self) -> None:
+        """
+        Tests that the data function returns the expected data.
+        """
+        for row, pdf_data in enumerate(self.data_2_pdfs):
+            for column, data in enumerate(pdf_data.values()):
+                index = self.data_model_2_pdfs.index(row, column)
+                model_data = self.data_model_2_pdfs.data(index, Qt.ItemDataRole.DisplayRole)
+                self.assertEqual(data, model_data)
 
 
 if __name__ == "__main__":
