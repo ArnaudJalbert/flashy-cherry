@@ -6,8 +6,8 @@ from typing import List, Dict, Union
 
 from PyQt6.QtCore import QModelIndex, Qt
 
-from interfaces.desktop.models.pdf_info import PDFInfoModel
-from interfaces.desktop.exceptions.pdf_info_exceptions import (
+from interfaces.desktop.models import PDFInfoModel
+from interfaces.desktop.exceptions import (
     IncorrectPDFInfoModelDataLength,
 )
 

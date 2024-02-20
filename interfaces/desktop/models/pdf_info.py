@@ -7,7 +7,7 @@ from typing import Dict, Union, List
 from PyQt6.QtCore import QAbstractTableModel, Qt
 from PyQt6.QtWidgets import QTableView, QApplication
 
-from interfaces.desktop.exceptions.pdf_info_exceptions import (
+from interfaces.desktop.exceptions import (
     IncorrectPDFInfoModelDataLength,
 )
 
@@ -81,7 +81,7 @@ class PDFInfoModel(QAbstractTableModel):
                     )
 
     @classmethod
-    def mapping(cls) -> Dict[str, str]:
+    def mapping(cls) -> dict[int, str]:
         """
         Returns:
             The mapping of the data model.
@@ -135,14 +135,11 @@ class PDFInfoModel(QAbstractTableModel):
         column = index.column()
 
         if role == Qt.ItemDataRole.DisplayRole:
-            pdf_index = row  # find which pdf needs to be fetched
-            data_index = self._mapping[
-                column
-            ]  # find which d=ata point from the pdf need to be displayed
             return self._pdfs_data[row][self._mapping[column]]
 
 
 if __name__ == "__main__":
+    # run standalone widget
     app = QApplication(sys.argv)
     data = [
         {
