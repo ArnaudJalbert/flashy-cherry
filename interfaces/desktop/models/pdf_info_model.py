@@ -98,23 +98,23 @@ class PDFInfoModel(QAbstractTableModel):
 
     def rowCount(self, parent=...) -> int:
         """
-        The amount rows is defined by how much PDFs is provided in the data.
+        The amount rows are defined by how much PDFs are provided in the data.
         Args:
             parent: Useless in this case, there are no parents for this model
         Returns:
-            The amount of rows to display.
+            The number of rows to display.
         """
         return len(self._pdfs_data)
 
     def columnCount(self, parent=...) -> int:
         """
-        The amount of columns is defined by the mapping, depending on how much data points
+        The mapping defines the number of columns, depending on how much data points
         need to be displayed.
         Args:
             parent: Useless in this case, there are no parents for this model
 
         Returns:
-            The amount of rows to display.
+            The number of rows to display.
         """
         return len(self._mapping)
 

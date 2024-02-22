@@ -4,7 +4,7 @@ Tests everything that has to do with the PDFInfoModel.
 import unittest
 from typing import List, Dict, Union
 
-from PyQt6.QtCore import QModelIndex, Qt
+from PyQt6.QtCore import Qt
 
 from interfaces.desktop.models import PDFInfoModel
 from interfaces.desktop.exceptions import (
