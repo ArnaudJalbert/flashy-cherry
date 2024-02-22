@@ -3,7 +3,7 @@ Model to populate a view that accepts PDFs drops and displays them.
 """
 import os
 
-from PyQt6.QtCore import QAbstractListModel, QModelIndex, QUrl, Qt
+from PyQt6.QtCore import QAbstractListModel, QUrl, Qt
 from typing import List, Union
 
 PDF_EXTENSION = ".pdf"

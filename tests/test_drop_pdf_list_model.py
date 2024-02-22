@@ -2,7 +2,7 @@ import unittest
 from copy import copy
 from typing import List
 
-from interfaces.desktop.models import DropPDFListModel
+from interfaces.desktop.models.drop_pdf_list_model import DropPDFListModel
 from PyQt6.QtCore import QUrl, Qt
 
 

@@ -4,9 +4,9 @@ View that allows PDF files to be dropped and saved.
 import sys
 
 from PyQt6.QtWidgets import QApplication, QListView
-from PyQt6.QtCore import pyqtSignal, QSize, Qt, QUrl
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent
-from interfaces.desktop.models import DropPDFListModel
+from interfaces.desktop.models.drop_pdf_list_model import DropPDFListModel
 
 
 class DropPDFListView(QListView):
