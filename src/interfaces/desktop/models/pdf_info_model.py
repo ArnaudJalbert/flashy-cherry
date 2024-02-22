@@ -2,12 +2,13 @@
 Defines the data model for displaying information about a PDF.
 """
 import sys
+
 from copy import copy
 from typing import Dict, Union, List
 from PyQt6.QtCore import QAbstractTableModel, Qt
 from PyQt6.QtWidgets import QTableView, QApplication
 
-from interfaces.desktop.exceptions import (
+from interfaces.desktop.exceptions.pdf_info_exceptions import (
     IncorrectPDFInfoModelDataLength,
 )
 
