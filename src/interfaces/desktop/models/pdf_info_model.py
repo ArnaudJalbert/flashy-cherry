@@ -1,8 +1,6 @@
 """
 Defines the data model for displaying information about a PDF.
 """
-import sys
-
 from copy import copy
 from typing import Dict, Union, List
 from PyQt6.QtCore import QAbstractTableModel, Qt
