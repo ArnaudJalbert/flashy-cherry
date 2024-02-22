@@ -6,7 +6,6 @@ import sys
 from copy import copy
 from typing import Dict, Union, List
 from PyQt6.QtCore import QAbstractTableModel, Qt
-from PyQt6.QtWidgets import QTableView, QApplication
 
 from interfaces.desktop.exceptions.pdf_info_exceptions import (
     IncorrectPDFInfoModelDataLength,
@@ -137,27 +136,3 @@ class PDFInfoModel(QAbstractTableModel):
 
         if role == Qt.ItemDataRole.DisplayRole:
             return self._pdfs_data[row][self._mapping[column]]
-
-
-if __name__ == "__main__":
-    # run standalone widget
-    app = QApplication(sys.argv)
-    data = [
-        {
-            "filename": "test.pdf",
-            "filepath": "/a/path/for/test.pdf",
-            "pages_amount": 5,
-            "words_amount": 10,
-        },
-        {
-            "filename": "another_test.pdf",
-            "filepath": "/another/path/for/another_test.pdf",
-            "pages_amount": 7,
-            "words_amount": 14,
-        },
-    ]
-    table_view = QTableView()
-    table_view_model = PDFInfoModel(data)
-    table_view.setModel(table_view_model)
-    table_view.show()
-    sys.exit(app.exec())
