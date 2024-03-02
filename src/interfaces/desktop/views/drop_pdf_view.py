@@ -71,12 +71,3 @@ class DropPDFListView(QListView):
                 self.model().add_pdf(dropped_url)
         else:
             event.ignore()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    form = DropPDFListView()
-    model = DropPDFListModel()
-    form.setModel(model)
-    form.show()
-    app.exec()
