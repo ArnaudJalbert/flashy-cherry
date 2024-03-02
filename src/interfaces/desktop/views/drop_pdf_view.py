@@ -1,12 +1,9 @@
 """
 View that allows PDF files to be dropped and saved.
 """
-import sys
-
-from PyQt6.QtWidgets import QApplication, QListView
+from PyQt6.QtWidgets import QListView
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent
-from interfaces.desktop.models.drop_pdf_list_model import DropPDFListModel
 
 
 class DropPDFListView(QListView):
@@ -71,12 +68,3 @@ class DropPDFListView(QListView):
                 self.model().add_pdf(dropped_url)
         else:
             event.ignore()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    form = DropPDFListView()
-    model = DropPDFListModel()
-    form.setModel(model)
-    form.show()
-    app.exec()
